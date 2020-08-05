@@ -1,0 +1,2 @@
+export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
+export const SIGN_IN_SUCCESSED = 'SIGN_IN_SUCCESSED';

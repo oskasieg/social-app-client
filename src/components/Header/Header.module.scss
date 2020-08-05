@@ -1,0 +1,79 @@
+.Header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #5e7ccfa3;
+  box-shadow: 1px 1px 5px #0000ffc9;
+  flex-wrap: wrap;
+  align-self: flex-start;
+
+  &__logo {
+    font-size: 1.2em;
+    margin: 1rem;
+    color: #2f2fa4;
+  }
+
+  &__menu {
+    margin: 0.5rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 28px;
+    height: 20px;
+  }
+
+  &__bars {
+    width: 28px;
+    height: 2px;
+    background-color: black;
+    position: relative;
+  }
+
+  &__bars::before {
+    content: '';
+    position: absolute;
+    background-color: black;
+    width: 28px;
+    height: 2px;
+    bottom: 7px;
+  }
+
+  &__bars::after {
+    content: '';
+    position: absolute;
+    background-color: black;
+    width: 28px;
+    height: 2px;
+    top: 7px;
+  }
+
+  &__options {
+    padding: 1rem 1rem 0.5rem 1rem;
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__hidden {
+    display: none;
+  }
+
+  &__option {
+    text-align: center;
+    margin: 0 0 0.5rem 0;
+    padding: 0 0 0.5rem 0;
+    width: 90%;
+    border-bottom: 1px solid black;
+    text-decoration: none;
+    color: blue;
+  }
+
+  &__option:last-of-type {
+    border: none;
+    margin: 0;
+  }
+}
