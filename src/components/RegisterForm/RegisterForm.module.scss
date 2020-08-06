@@ -10,8 +10,10 @@
     margin: 0.5rem 0.5rem 0;
   }
 
-  &__textInput {
+  &__textInput,
+  &__textInput:focus {
     margin: 0 0.5rem 0.5rem;
+    outline: inherit;
     width: 91%;
   }
 
@@ -29,7 +31,9 @@
     margin: 0.5rem 0.5rem 0 0.5rem;
   }
 
-  &__button {
+  &__button,
+  &__button:focus {
+    outline: inherit;
     width: 50%;
   }
 }

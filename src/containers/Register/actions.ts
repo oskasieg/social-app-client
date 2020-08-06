@@ -1,14 +1,13 @@
 import { IRegisterFormValues } from './types';
-import { SIGN_IN_REQUEST, SIGN_IN_SUCCESSED } from './constants';
+import { SIGN_UP_REQUEST, SIGN_UP_SUCCESSED } from './constants';
 import { IUserProfile } from '../Profile/types';
 
-export const signInAction = (data: IRegisterFormValues) => ({
-  type: SIGN_IN_REQUEST,
+export const signUpAction = (data: IRegisterFormValues) => ({
+  type: SIGN_UP_REQUEST,
   data,
 });
 
-export const signInSuccessed = (user: IUserProfile, token: string) => ({
-  type: SIGN_IN_SUCCESSED,
+export const signUpSuccessed = (user: IUserProfile) => ({
+  type: SIGN_UP_SUCCESSED,
   user,
-  token,
 });

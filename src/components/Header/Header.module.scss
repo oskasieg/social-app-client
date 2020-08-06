@@ -12,6 +12,7 @@
     font-size: 1.2em;
     margin: 1rem;
     color: #2f2fa4;
+    text-decoration: none;
   }
 
   &__menu {
@@ -75,5 +76,22 @@
   &__option:last-of-type {
     border: none;
     margin: 0;
+  }
+
+  &__lngButtons {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  &__lngButton,
+  &__lngButton:focus {
+    background-color: transparent;
+    margin: 0 0 0 0.3rem;
+    border: none;
+    font-size: 1em;
+    padding: 0;
+    outline: inherit;
+    cursor: pointer;
   }
 }

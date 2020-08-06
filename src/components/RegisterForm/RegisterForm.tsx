@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 import styles from './RegisterForm.module.scss';
-import { IInterest, IRegisterFormValues } from '../../containers/Register/types';
-import { signInAction } from '../../containers/Register/actions';
+import { IRegisterFormValues, IRegisterFormProps } from '../../containers/Register/types';
+import { signUpAction } from '../../containers/Register/actions';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
-const RegisterForm = () => {
+const RegisterForm = ({ interests }: IRegisterFormProps) => {
   const dispatcher = useDispatch();
 
-  const [interests, setInterests] = useState<IInterest[]>([]);
+  const { t } = useTranslation();
 
   const initialValues: IRegisterFormValues = {
     login: '',
@@ -23,20 +24,9 @@ const RegisterForm = () => {
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      dispatcher(signInAction(values));
+      dispatcher(signUpAction(values));
     },
   });
-
-  useEffect(() => {
-    const fetchInterests = async () => {
-      const response = await fetch('http://localhost:8000/interests');
-      const json = await response.json();
-
-      setInterests(json);
-    };
-
-    fetchInterests();
-  }, []);
 
   return (
     <form className={styles.RegisterForm} onSubmit={formik.handleSubmit}>
@@ -53,7 +43,7 @@ const RegisterForm = () => {
       />
 
       <label htmlFor='password' className={styles.RegisterForm__label}>
-        Password
+        {t('Password')}
       </label>
       <input
         id='password'

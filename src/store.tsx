@@ -1,13 +1,20 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import profileReducer from './containers/Profile/reducer';
 import createSagaMiddleware from 'redux-saga';
+import registerSaga from './containers/Register/saga';
 import profileSaga from './containers/Profile/saga';
 import { all } from 'redux-saga/effects';
+import { IUserProfile } from './containers/Profile/types';
 
 declare global {
   interface Window {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
   }
+}
+
+export interface IStoreType {
+  user: IUserProfile;
+  isLogged: boolean;
 }
 
 const sagaMiddleware = createSagaMiddleware();
@@ -17,7 +24,7 @@ const middleware = [sagaMiddleware];
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 function* rootSaga() {
-  yield all([profileSaga()]);
+  yield all([profileSaga(), registerSaga()]);
 }
 
 const rootReducer = profileReducer;

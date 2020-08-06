@@ -1,7 +1,12 @@
 import { IUserProfile } from '../Profile/types';
+import { SIGN_UP_SUCCESSED, SIGN_UP_REQUEST } from './constants';
 
 export interface IInterest {
   name: string;
+}
+
+export interface IRegisterFormProps {
+  interests: IInterest[];
 }
 
 export interface IRegisterFormValues {
@@ -14,13 +19,13 @@ export interface IRegisterFormValues {
   interests: IInterest[];
 }
 
-export interface ISignInAction {
-  type: ISignInAction;
+export interface ISignUpAction {
+  type: typeof SIGN_UP_REQUEST;
   data: IRegisterFormValues;
 }
 
-export interface ISignInSuccessed {
-  type: ISignInSuccessed;
+export interface ISignUpSuccessed {
+  type: typeof SIGN_UP_SUCCESSED;
   user: IUserProfile;
   token: string;
 }

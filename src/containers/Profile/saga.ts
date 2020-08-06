@@ -1,23 +1,57 @@
+import { ISignUpAction } from '../Register/types';
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { signInSuccessed } from '../Register/actions';
-import { ISignInAction } from '../Register/types';
-import { SIGN_IN_REQUEST } from '../Register/constants';
-
-function* signIn(action: ISignInAction) {
-  const url = 'http://localhost:8000/user/register';
+import { SIGN_IN_REQUEST, GET_PROFILE_REQUEST } from './contants';
+import { signInUpSuccessed } from './actions';
+import { setCookie } from '../../lib/cookie';
+import { IGetProfileAction } from './types';
+import { push } from 'react-router-redux';
+function* signIn(action: ISignUpAction) {
+  const url = 'http://localhost:8000/user/';
 
   try {
     const response = yield call(fetch, url, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-type': 'application/json',
       },
       body: JSON.stringify(action.data),
     });
 
-    const json = yield response.json();
+    if (response.status === 200) {
+      const json = yield response.json();
 
-    yield put(signInSuccessed(json.user, json.token));
+      setCookie(
+        JSON.stringify({
+          login: json.user.login,
+          token: json.token,
+        })
+      );
+
+      yield put(signInUpSuccessed(json.user));
+    }
+  } catch (e) {
+    throw new Error(e);
+  }
+}
+
+function* getProfile(action: IGetProfileAction) {
+  const url = 'http://localhost:8000/user/profile';
+  try {
+    const response = yield call(fetch, url, {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${action.token}`,
+      },
+      body: JSON.stringify({ login: action.login }),
+    });
+
+    if (response.status === 200) {
+      const json = yield response.json();
+
+      yield put(signInUpSuccessed(json));
+      yield put(push('/'));
+    }
   } catch (e) {
     throw new Error(e);
   }
@@ -25,4 +59,5 @@ function* signIn(action: ISignInAction) {
 
 export default function* profileSaga() {
   yield takeEvery(SIGN_IN_REQUEST, signIn);
+  yield takeEvery(GET_PROFILE_REQUEST, getProfile);
 }
