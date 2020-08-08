@@ -2,6 +2,7 @@ import { takeEvery, call, put } from 'redux-saga/effects';
 import { signUpSuccessed } from './actions';
 import { ISignUpAction } from './types';
 import { SIGN_UP_REQUEST } from './constants';
+import { forwardTo } from '../../lib/history';
 
 function* signUp(action: ISignUpAction) {
   const url = 'http://localhost:8000/user/register';
@@ -15,9 +16,13 @@ function* signUp(action: ISignUpAction) {
       body: JSON.stringify(action.data),
     });
 
-    const json = yield response.json();
+    if (response.status === 200) {
+      const json = yield response.json();
 
-    yield put(signUpSuccessed(json.user));
+      yield call(forwardTo, '/');
+
+      yield put(signUpSuccessed(json.user));
+    }
   } catch (e) {
     throw new Error(e);
   }

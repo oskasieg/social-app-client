@@ -5,11 +5,7 @@ export interface IInterest {
   name: string;
 }
 
-export interface IRegisterFormProps {
-  interests: IInterest[];
-}
-
-export interface IRegisterFormValues {
+export interface IUserFormValues {
   login: string;
   firstName: string;
   lastName: string;
@@ -21,7 +17,7 @@ export interface IRegisterFormValues {
 
 export interface ISignUpAction {
   type: typeof SIGN_UP_REQUEST;
-  data: IRegisterFormValues;
+  data: IUserFormValues;
 }
 
 export interface ISignUpSuccessed {

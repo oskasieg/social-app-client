@@ -1,4 +1,4 @@
-import { createStore, compose, applyMiddleware } from 'redux';
+import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import profileReducer from './containers/Profile/reducer';
 import createSagaMiddleware from 'redux-saga';
 import registerSaga from './containers/Register/saga';
@@ -13,8 +13,10 @@ declare global {
 }
 
 export interface IStoreType {
-  user: IUserProfile;
-  isLogged: boolean;
+  profileReducer: {
+    user: IUserProfile;
+    isLogged: boolean;
+  };
 }
 
 const sagaMiddleware = createSagaMiddleware();
@@ -27,7 +29,7 @@ function* rootSaga() {
   yield all([profileSaga(), registerSaga()]);
 }
 
-const rootReducer = profileReducer;
+const rootReducer = combineReducers({ profileReducer });
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(...middleware)));
 

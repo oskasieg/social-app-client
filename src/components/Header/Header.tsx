@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { IStoreType } from '../../store';
 import { useTranslation } from 'react-i18next';
 import { logoutAction } from '../../containers/Profile/actions';
+import { clearCookie } from '../../lib/cookie';
 
 const Header = () => {
   const { t } = useTranslation();
@@ -14,7 +15,7 @@ const Header = () => {
 
   const [menuVisible, setMenuVisible] = useState<boolean>(false);
 
-  const isLogged = useSelector((state: IStoreType) => state.isLogged);
+  const isLogged = useSelector((state: IStoreType) => state.profileReducer.isLogged);
 
   const [currentLng, setCurrentLng] = useState<string | null>('en');
 
@@ -33,6 +34,7 @@ const Header = () => {
   };
 
   const logoutProfile = () => {
+    clearCookie();
     dispatcher(logoutAction());
     setMenuVisible(!menuVisible);
   };

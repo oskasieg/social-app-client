@@ -1,0 +1,98 @@
+.EditProfileForm {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 95%;
+  background-color: #45454526;
+  box-shadow: 0px 0px 5px #00000075;
+  border-radius: 10px;
+  padding-bottom: 1rem;
+  padding: 0.5rem;
+  padding-top: 0;
+
+  &__title {
+    color: #2f2fa4;
+    text-align: center;
+    margin: 0.5rem 0;
+  }
+
+  &__label {
+    color: blue;
+  }
+
+  &__row {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__field {
+    margin: 0.2rem 0 0.5rem;
+  }
+
+  &__input {
+    margin: 0.2rem 0 0.5rem;
+    width: 60%;
+  }
+
+  &__button,
+  &__button:focus {
+    outline: inherit;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    height: autp;
+    color: blue;
+    cursor: pointer;
+  }
+
+  &__buttonCancel,
+  &__buttonCancel:focus {
+    outline: inherit;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    height: autp;
+    color: red;
+    cursor: pointer;
+  }
+
+  &__buttonSubmit,
+  &__buttonSubmit:focus {
+    outline: inherit;
+    border: none;
+    padding: 0;
+    height: autp;
+    color: #2a753a;
+    cursor: pointer;
+    background-color: #85ff85;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid;
+    border-radius: 5px;
+    width: 75px;
+  }
+
+  &__buttonCancelForm,
+  &__buttonCancelForm:focus {
+    outline: inherit;
+    border: none;
+    padding: 0;
+    padding: 0.2rem 0.5rem;
+    background-color: #ff9b97;
+    height: autp;
+    color: red;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid;
+    width: 75px;
+  }
+
+  &__line {
+    align-self: center;
+    margin: 0.5rem 0;
+    height: 1px;
+    width: 90%;
+    background-color: blue;
+  }
+}

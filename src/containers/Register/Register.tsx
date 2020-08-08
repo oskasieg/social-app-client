@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Register.module.scss';
-import RegisterForm from '../../components/RegisterForm/RegisterForm';
+import UserForm from '../../components/UserForm/UserForm';
 import { IInterest } from './types';
 
 const Register = () => {
@@ -20,7 +20,7 @@ const Register = () => {
   return (
     <div className={styles.Register}>
       <div className={styles.Register__title}>Register</div>
-      <RegisterForm interests={interests} />
+      <UserForm interests={interests} type='register' />
     </div>
   );
 };

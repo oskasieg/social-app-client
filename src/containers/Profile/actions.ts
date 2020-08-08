@@ -1,8 +1,13 @@
 import { ILoginFormValues, IUserProfile } from './types';
-import { SIGN_IN_REQUEST, SIGN_IN_SUCCESSED, GET_PROFILE_REQUEST, LOGOUT_PROFILE } from './contants';
+import { SIGN_IN_REQUEST, SIGN_IN_SUCCESSED, GET_PROFILE_REQUEST, LOGOUT_PROFILE, EDIT_PROFILE_REQUEST } from './contants';
 
 export const signInAction = (data: ILoginFormValues) => ({
   type: SIGN_IN_REQUEST,
+  data,
+});
+
+export const editProfileAction = (data: IUserProfile) => ({
+  type: EDIT_PROFILE_REQUEST,
   data,
 });
 

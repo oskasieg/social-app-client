@@ -1,4 +1,4 @@
-import { GET_PROFILE_REQUEST, GET_PROFILE_SUCCESEED, LOGOUT_PROFILE } from './contants';
+import { GET_PROFILE_REQUEST, GET_PROFILE_SUCCESEED, LOGOUT_PROFILE, EDIT_PROFILE_REQUEST } from './contants';
 import { SIGN_IN_REQUEST, SIGN_IN_SUCCESSED } from './contants';
 import { IInterest } from '../Register/types';
 
@@ -7,18 +7,23 @@ export interface IUserProfile {
   firstName: string;
   lastName: string;
   age: number;
-  interests: IInterest[];
+  interests: string[];
   followers: number;
   avatar: string;
   likes: number;
   numberOfPosts: number;
   createdAt: Date;
   lastLogin: Date;
+  password: string;
 }
 
 export interface ILoginFormValues {
   login: string;
   password: string;
+}
+
+export interface IUserProfileProps {
+  user: IUserProfile;
 }
 
 // REDUX
@@ -32,6 +37,11 @@ export interface ISignInSuccessed {
   type: typeof SIGN_IN_SUCCESSED;
   user: IUserProfile;
   token: string;
+}
+
+export interface IEditProfileAction {
+  type: typeof EDIT_PROFILE_REQUEST;
+  data: IUserProfile;
 }
 
 export interface ILogoutAction {

@@ -1,8 +1,8 @@
-import { IRegisterFormValues } from './types';
+import { IUserFormValues } from './types';
 import { SIGN_UP_REQUEST, SIGN_UP_SUCCESSED } from './constants';
 import { IUserProfile } from '../Profile/types';
 
-export const signUpAction = (data: IRegisterFormValues) => ({
+export const signUpAction = (data: IUserFormValues) => ({
   type: SIGN_UP_REQUEST,
   data,
 });

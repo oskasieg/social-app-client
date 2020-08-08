@@ -1,0 +1,72 @@
+.UserProfile {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+  background-color: #45454526;
+  box-shadow: 0px 0px 5px #00000075;
+  border-radius: 10px;
+  padding-bottom: 1rem;
+
+  &__avatar {
+    width: 50%;
+    padding: 1rem 1rem 0 1rem;
+    img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+    }
+  }
+
+  &__stats {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0 1rem;
+  }
+
+  &__stat {
+    color: blue;
+  }
+
+  &__stat:nth-of-type(2) {
+    margin: 0.5rem 0;
+  }
+
+  &__row {
+    width: 70%;
+    border-bottom: 1px solid;
+    padding: 0.5rem 1rem 0.5rem;
+    text-align: center;
+    color: blue;
+    margin-bottom: 0.5rem;
+  }
+
+  &__left {
+    margin: 0.5rem 0 0.5rem 10%;
+    width: 40%;
+    text-align: left;
+  }
+
+  &__right {
+    width: 40%;
+    margin: 0.5rem 10% 0.5rem 0;
+    text-align: right;
+  }
+
+  &__line {
+    margin: 1rem 0;
+    width: 80%;
+    height: 1px;
+    background-color: black;
+  }
+
+  &__interests {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0 10% 0.5rem 10%;
+  }
+}

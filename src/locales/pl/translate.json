@@ -3,5 +3,17 @@
   "Submit": "Zatwierdź",
   "Profile": "Profil",
   "Edit profile": "Edytuj profil",
-  "Logout": "Wyloguj"
+  "Logout": "Wyloguj",
+  "My profile": "Mój profil",
+  "Age": "Wiek",
+  "Created at": "Założone",
+  "Last login": "Ostatnie logowanie",
+  "Interests": "Zainteresowania",
+  "First name": "Imię",
+  "Last name": "Nazwisko",
+  "Edit": "Edytuj",
+  "Save": "Zapisz",
+  "Cancel": "Anuluj",
+  "Personal data": "Dane osobowe",
+  "Edit password": "Edytuj hasło"
 }
