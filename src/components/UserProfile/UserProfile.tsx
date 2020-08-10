@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IUserProfileProps } from '../../containers/Profile/types';
 import styles from './UserProfile.module.scss';
 import avatar from '../../assets/avatar.png';
@@ -19,7 +19,7 @@ const UserProfile = ({ user }: IUserProfileProps) => {
   return (
     <div className={styles.UserProfile}>
       <div className={styles.UserProfile__avatar}>
-        <img src={avatar} alt='avatar' />
+        <img src={avatar} alt='avatar'></img>
       </div>
       <div className={styles.UserProfile__stats}>
         <div className={styles.UserProfile__stat}>P: {user.numberOfPosts}</div>
@@ -35,7 +35,7 @@ const UserProfile = ({ user }: IUserProfileProps) => {
         {t('Interests')}:
       </div>
       <div className={styles.UserProfile__interests}>
-        {user.interests && user.interests.map((interest: string) => <Interest interest={interest} />)}
+        {user.interests && user.interests.map((interest: string) => <Interest key={interest} interest={interest} />)}
       </div>
       <div className={styles.UserProfile__line}></div>
       <div className={styles.UserProfile__left}>{t('Created at')}:</div>

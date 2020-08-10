@@ -3,6 +3,7 @@ import { signUpSuccessed } from './actions';
 import { ISignUpAction } from './types';
 import { SIGN_UP_REQUEST } from './constants';
 import { forwardTo } from '../../lib/history';
+import { setCookie } from '../../lib/cookie';
 
 function* signUp(action: ISignUpAction) {
   const url = 'http://localhost:8000/user/register';
@@ -18,6 +19,13 @@ function* signUp(action: ISignUpAction) {
 
     if (response.status === 200) {
       const json = yield response.json();
+
+      setCookie(
+        JSON.stringify({
+          login: json.user.login,
+          token: json.token,
+        })
+      );
 
       yield call(forwardTo, '/');
 

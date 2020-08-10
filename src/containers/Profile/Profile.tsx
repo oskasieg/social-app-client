@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { IStoreType } from '../../store';
 import styles from './Profile.module.scss';
 import UserProfile from '../../components/UserProfile/UserProfile';

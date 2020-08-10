@@ -6,9 +6,10 @@ export const signInAction = (data: ILoginFormValues) => ({
   data,
 });
 
-export const editProfileAction = (data: IUserProfile) => ({
+export const editProfileAction = (data: any, token: string) => ({
   type: EDIT_PROFILE_REQUEST,
   data,
+  token,
 });
 
 export const logoutAction = () => ({

@@ -3,10 +3,13 @@ import styles from './EditProfileForm.module.scss';
 import { IEditProfileFormProps, IEditProfileFormValues } from './types';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { editProfileAction, signInAction } from '../../containers/Profile/actions';
+import { editProfileAction } from '../../containers/Profile/actions';
 import { useFormik } from 'formik';
-import { IInterest } from '../../containers/Register/types';
 import InterestCheckbox from '../InterestCheckbox/InterestCheckbox';
+import { forwardTo } from '../../lib/history';
+import { getCookie } from '../../lib/cookie';
+import { IInterest } from '../../containers/Register/types';
+import axios from 'axios';
 
 const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
   const { t } = useTranslation();
@@ -18,11 +21,13 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
   const [ageInput, setAgeInput] = useState<boolean>(false);
   const [passwordInput, setPasswordInput] = useState<boolean>(false);
 
+  const [avatar, setAvatar] = useState<string>(user.avatar || ' ');
+
   const initialValues: IEditProfileFormValues = {
     firstName: user.firstName,
     lastName: user.lastName,
     password: user.password,
-    interests: user.interests,
+    interests: [],
     age: user.age,
     avatar: user.avatar,
     currentPassword: '',
@@ -33,7 +38,24 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      alert(JSON.stringify(values));
+      const cookieExist = getCookie();
+
+      if (cookieExist) {
+        const cookie = JSON.parse(getCookie() || '');
+
+        const formData = new FormData();
+        formData.append('login', user.login);
+        formData.append('firstName', values.firstName);
+        formData.append('lastName', values.lastName);
+        formData.append('password', values.password);
+        for (const interest in values.interests) formData.append('interests', interest);
+        formData.append('age', values.age.toString());
+        formData.append('avatar', values.avatar);
+        console.log({ ...formData });
+        dispatcher(editProfileAction({ ...values, login: cookie.login }, cookie.token));
+      }
+
+      //forwardTo('/profile');
     },
   });
 
@@ -63,18 +85,46 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
 
     if (response.status === 200 && formik.values.newPassword === formik.values.repeatNewPassword) {
       formik.setFieldValue('password', formik.values.newPassword);
+      setPasswordInput(false);
     }
   };
 
-  // eslint-disable-next-line
+  const handleImageChange = (e: React.FormEvent<HTMLInputElement>) => {
+    if (e.currentTarget.files) {
+      const formData = new FormData();
+      formData.append('avatar', e.currentTarget.files[0]);
+      formData.append('login', user.login || ' ');
+
+      setAvatar(URL.createObjectURL(e.currentTarget.files[0]));
+
+      const cookieExist = getCookie();
+      if (cookieExist) {
+        const cookie = JSON.parse(getCookie() || ' ');
+        axios.put('http://localhost:8000/user/profile/edit', formData, {
+          headers: { 'Content-type': 'application/json', Authorization: `Bearer ${cookie.token}` },
+        });
+      }
+    }
+  };
+
   useEffect(() => {
-    formik.setValues({ ...user, currentPassword: '', newPassword: '', repeatNewPassword: '' });
+    formik.setValues({ ...user, currentPassword: '', newPassword: '', repeatNewPassword: '', interests: [] });
+    // eslint-disable-next-line
+    setAvatar(user.avatar);
   }, [user]);
 
   return (
     <form className={styles.EditProfileForm} onSubmit={formik.handleSubmit}>
-      <div className={styles.EditProfileForm__title}>{t('Personal data')}</div>
+      <div className={styles.EditProfileForm__title}>{t('Avatar')}</div>
+      <div className={styles.EditProfileForm__row} style={{ justifyContent: 'center' }}>
+        <div className={styles.EditProfileForm__avatar}>
+          <img className={styles.EditProfileForm__image} src={avatar ? avatar : user.avatar} alt='avatar' />
+          <input name='avatar' type='file' className={styles.EditProfileForm__fileInput} onChange={handleImageChange} />
+        </div>
+      </div>
+      <div className={styles.EditProfileForm__line} />
 
+      <div className={styles.EditProfileForm__title}>{t('Personal data')}</div>
       <label htmlFor='firstName' className={styles.EditProfileForm__label}>
         {t('First name')}
       </label>
@@ -248,12 +298,14 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
 
       <div className={styles.EditProfileForm__line} />
       <div className={styles.EditProfileForm__title}>{t('Interests')}</div>
-      <div className={styles.EditProfileForm__row} style={{ overflowX: 'auto', padding: '0.5rem', flexWrap: 'nowrap' }}>
-        {user.interests &&
-          user.interests.map((interest: string) => (
-            <InterestCheckbox key={interest} name='interests' value={interest} onChange={formik.handleChange} />
+      <div className={styles.EditProfileForm__row} style={{ overflowX: 'auto', padding: '0.5rem', justifyContent: 'space-evenly' }}>
+        {interests &&
+          interests.map((interest: IInterest) => (
+            <InterestCheckbox key={interest.name} name='interests' value={interest.name} onChange={formik.handleChange} />
           ))}
       </div>
+
+      <div className={styles.EditProfileForm__line} />
 
       <div className={styles.EditProfileForm__row} style={{ justifyContent: 'space-evenly', marginTop: '0.5rem' }}>
         <button type='submit' className={styles.EditProfileForm__buttonSubmit}>

@@ -12,7 +12,7 @@ export interface IEditProfileFormValues {
   password: string;
   interests: string[];
   age: number;
-  avatar: string;
+  avatar: any;
   currentPassword: string;
   newPassword: string;
   repeatNewPassword: string;

@@ -42,6 +42,7 @@ export interface ISignInSuccessed {
 export interface IEditProfileAction {
   type: typeof EDIT_PROFILE_REQUEST;
   data: IUserProfile;
+  token: string;
 }
 
 export interface ILogoutAction {
