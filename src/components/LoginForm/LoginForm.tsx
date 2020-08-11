@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import { ILoginFormValues } from '../../containers/Profile/types';
 import { useDispatch } from 'react-redux';
 import { signInAction } from '../../containers/Profile/actions';
+import SubmitButton from '../SubmitButton/SubmitButton';
 
 const LoginForm = () => {
   const { t } = useTranslation();
@@ -27,7 +28,7 @@ const LoginForm = () => {
 
   return (
     <div className={styles.LoginForm}>
-      <div className={styles.LoginForm__title}>Sign up</div>
+      <div className={styles.LoginForm__title}>{t('Login form')}</div>
       <form className={styles.LoginForm__form} onSubmit={formik.handleSubmit}>
         <label htmlFor='login' className={styles.LoginForm__label}>
           Login
@@ -45,9 +46,7 @@ const LoginForm = () => {
           onChange={formik.handleChange}
           value={formik.values.password}
         />
-        <button type='submit' className={styles.LoginForm__button}>
-          {t('Submit')}
-        </button>
+        <SubmitButton type='submit' text='Submit' />
       </form>
     </div>
   );

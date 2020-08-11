@@ -7,6 +7,7 @@ import { IStoreType } from '../../store';
 import { useTranslation } from 'react-i18next';
 import { logoutAction } from '../../containers/Profile/actions';
 import { clearCookie } from '../../lib/cookie';
+import { showNotification } from '../../lib/notifications';
 
 const Header = () => {
   const { t } = useTranslation();
@@ -35,6 +36,7 @@ const Header = () => {
 
   const logoutProfile = () => {
     clearCookie();
+    showNotification('success', 'Success', 'You logged out!');
     dispatcher(logoutAction());
     setMenuVisible(!menuVisible);
   };

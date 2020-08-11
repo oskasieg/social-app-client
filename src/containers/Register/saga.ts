@@ -4,6 +4,7 @@ import { ISignUpAction } from './types';
 import { SIGN_UP_REQUEST } from './constants';
 import { forwardTo } from '../../lib/history';
 import { setCookie } from '../../lib/cookie';
+import { showNotification } from '../../lib/notifications';
 
 function* signUp(action: ISignUpAction) {
   const url = 'http://localhost:8000/user/register';
@@ -27,9 +28,13 @@ function* signUp(action: ISignUpAction) {
         })
       );
 
+      showNotification('success', 'Success', 'You have created an account!');
+
       yield call(forwardTo, '/');
 
       yield put(signUpSuccessed(json.user));
+    } else {
+      showNotification('danger', 'Error', "Can't created an account!");
     }
   } catch (e) {
     throw new Error(e);

@@ -10,6 +10,10 @@ import { forwardTo } from '../../lib/history';
 import { getCookie } from '../../lib/cookie';
 import { IInterest } from '../../containers/Register/types';
 import axios from 'axios';
+import defaultAvatar from '../../assets/avatar.png';
+import SubmitButton from '../SubmitButton/SubmitButton';
+import CancelButton from '../CancelButton/CancelButton';
+import { showNotification } from '../../lib/notifications';
 
 const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
   const { t } = useTranslation();
@@ -43,19 +47,10 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
       if (cookieExist) {
         const cookie = JSON.parse(getCookie() || '');
 
-        const formData = new FormData();
-        formData.append('login', user.login);
-        formData.append('firstName', values.firstName);
-        formData.append('lastName', values.lastName);
-        formData.append('password', values.password);
-        for (const interest in values.interests) formData.append('interests', interest);
-        formData.append('age', values.age.toString());
-        formData.append('avatar', values.avatar);
-        console.log({ ...formData });
         dispatcher(editProfileAction({ ...values, login: cookie.login }, cookie.token));
       }
 
-      //forwardTo('/profile');
+      forwardTo('/profile');
     },
   });
 
@@ -103,14 +98,16 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
         axios.put('http://localhost:8000/user/profile/edit', formData, {
           headers: { 'Content-type': 'application/json', Authorization: `Bearer ${cookie.token}` },
         });
+
+        showNotification('info', 'Information', 'You have edited the profile!');
       }
     }
   };
 
   useEffect(() => {
     formik.setValues({ ...user, currentPassword: '', newPassword: '', repeatNewPassword: '', interests: [] });
-    // eslint-disable-next-line
     setAvatar(user.avatar);
+    // eslint-disable-next-line
   }, [user]);
 
   return (
@@ -118,7 +115,7 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
       <div className={styles.EditProfileForm__title}>{t('Avatar')}</div>
       <div className={styles.EditProfileForm__row} style={{ justifyContent: 'center' }}>
         <div className={styles.EditProfileForm__avatar}>
-          <img className={styles.EditProfileForm__image} src={avatar ? avatar : user.avatar} alt='avatar' />
+          <img className={styles.EditProfileForm__image} src={avatar ? avatar : user.avatar ? user.avatar : defaultAvatar} alt='avatar' />
           <input name='avatar' type='file' className={styles.EditProfileForm__fileInput} onChange={handleImageChange} />
         </div>
       </div>
@@ -308,12 +305,8 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
       <div className={styles.EditProfileForm__line} />
 
       <div className={styles.EditProfileForm__row} style={{ justifyContent: 'space-evenly', marginTop: '0.5rem' }}>
-        <button type='submit' className={styles.EditProfileForm__buttonSubmit}>
-          {t('Save')}
-        </button>
-        <button type='button' className={styles.EditProfileForm__buttonCancelForm} onClick={() => cancelForm()}>
-          {t('Cancel')}
-        </button>
+        <SubmitButton text='Save' type='submit' />
+        <CancelButton text='Cancel' type='button' onClick={cancelForm} />
       </div>
     </form>
   );

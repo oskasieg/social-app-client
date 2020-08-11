@@ -11,6 +11,8 @@ import MainPage from './components/MainPage/MainPage';
 import history from './lib/history';
 import Profile from './containers/Profile/Profile';
 import EditProfile from './containers/Profile/EditProfile/EditProfile';
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 
 const App = () => {
   const dispatcher = useDispatch();
@@ -26,6 +28,7 @@ const App = () => {
 
   return (
     <div className={styles.App}>
+      <ReactNotification isMobile={true} />
       <Router history={history}>
         <Header />
         <Switch>

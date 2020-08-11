@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { IUserProfileProps } from '../../containers/Profile/types';
 import styles from './UserProfile.module.scss';
-import avatar from '../../assets/avatar.png';
 import { useTranslation } from 'react-i18next';
-import { IInterest } from '../../containers/Register/types';
 import Interest from '../Interest/Interest';
+import avatar from '../../assets/avatar.png';
 
 const UserProfile = ({ user }: IUserProfileProps) => {
   const { t } = useTranslation();
@@ -19,7 +18,7 @@ const UserProfile = ({ user }: IUserProfileProps) => {
   return (
     <div className={styles.UserProfile}>
       <div className={styles.UserProfile__avatar}>
-        <img src={avatar} alt='avatar'></img>
+        <img src={user.avatar ? user.avatar : avatar} alt='avatar'></img>
       </div>
       <div className={styles.UserProfile__stats}>
         <div className={styles.UserProfile__stat}>P: {user.numberOfPosts}</div>

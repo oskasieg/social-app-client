@@ -1,27 +1,34 @@
 .UserForm {
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 0.2rem;
 
   &__label {
     align-self: flex-start;
-    margin: 0.5rem 0.5rem 0;
+    margin: 0 0.5rem;
   }
 
   &__textInput,
   &__textInput:focus {
-    margin: 0 0.5rem 0.5rem;
+    margin: 0 0.5rem;
     outline: inherit;
     width: 91%;
+  }
+
+  &__error {
+    height: 1em;
+    font-size: 0.8em;
+    margin-top: 0.2rem;
+    color: red;
   }
 
   &__tags {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    margin: 0 0 1rem 0;
+    margin: 0.5rem 1rem 0;
   }
 
   &__tag {
@@ -31,9 +38,11 @@
     margin: 0.5rem 0.5rem 0 0.5rem;
   }
 
-  &__button,
-  &__button:focus {
-    outline: inherit;
-    width: 50%;
+  &__line {
+    align-self: center;
+    margin: 0.5rem 0;
+    height: 1px;
+    width: 90%;
+    background-color: blue;
   }
 }

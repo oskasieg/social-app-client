@@ -15,5 +15,18 @@
   "Save": "Zapisz",
   "Cancel": "Anuluj",
   "Personal data": "Dane osobowe",
-  "Edit password": "Edytuj hasło"
+  "Edit password": "Edytuj hasło",
+  "Repeat password": "Powtórz hasło",
+  "Register form": "Formularz rejestracji",
+  "Register": "Zarejestruj",
+  "Can't created an account!": "Nie można utworzyć konta!",
+  "You have created an account!": "Utworzyłeś nowe konto!",
+  "Error": "Błąd",
+  "Success": "Sukces",
+  "Login form": "Formularz logowania",
+  "Can't log in!": "Nie można się zalogować!",
+  "You are logged in!": "Zalogowałeś się!",
+  "You logged out!": "Wylogowano z profilu!",
+  "You have edited the profile!": "Pomyślnie edytowano profil!",
+  "Information": "Informacja"
 }

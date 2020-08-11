@@ -1,0 +1,11 @@
+.CancelButton,
+.CancelButton:focus {
+  width: 100px;
+  outline: inherit;
+  padding: 0.4rem 0.5rem;
+  border-radius: 5px;
+  border: solid 2px #8e4b4b;
+  color: white;
+  background-color: #ff0000;
+  font-weight: bold;
+}

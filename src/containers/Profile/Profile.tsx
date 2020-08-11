@@ -4,11 +4,25 @@ import { IStoreType } from '../../store';
 import styles from './Profile.module.scss';
 import UserProfile from '../../components/UserProfile/UserProfile';
 import { useTranslation } from 'react-i18next';
+import { getProfileAction } from './actions';
+import { getCookie } from '../../lib/cookie';
 
 const Profile = () => {
   const { t } = useTranslation();
 
+  const dispatcher = useDispatch();
+
   const user = useSelector((state: IStoreType) => state.profileReducer.user);
+
+  useEffect(() => {
+    const cookieExist = getCookie();
+
+    if (cookieExist) {
+      const cookie = JSON.parse(cookieExist);
+
+      dispatcher(getProfileAction(cookie.login, cookie.token));
+    }
+  }, [dispatcher]);
 
   return (
     <div className={styles.Profile}>
