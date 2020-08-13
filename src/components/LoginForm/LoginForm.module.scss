@@ -14,6 +14,7 @@
     text-align: center;
     border-bottom: 1px blue solid;
     padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
   }
 
   &__form {
@@ -26,14 +27,21 @@
 
   &__label {
     align-self: flex-start;
-    margin: 0.5rem 0.5rem 0;
+    margin: 0 0.5rem;
   }
 
   &__input,
   &__input:focus {
     outline: inherit;
-    margin: 0 0.5rem 0.5rem;
+    margin: 0 0.5rem;
     width: 91%;
+  }
+
+  &__error {
+    height: 1em;
+    font-size: 0.8em;
+    margin-top: 0.2rem;
+    color: red;
   }
 
   &__button,

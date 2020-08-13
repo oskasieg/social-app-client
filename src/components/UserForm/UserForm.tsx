@@ -18,26 +18,26 @@ const UserForm = ({ interests, type }: IUserFormProps) => {
   const validationSchema = Yup.object().shape({
     login: Yup.string()
       .required(t('Login is required!'))
-      .min(3, t('Min. number of characters is 3'))
-      .max(20, t('Max. number of characters is 20')),
+      .min(3, t('Min. number of characters is 3.'))
+      .max(20, t('Max. number of characters is 20.')),
     password: Yup.string()
       .required('Password is required!')
-      .min(8, 'Min. number of characters is 8')
-      .max(16, 'Max. number of characters is 16'),
+      .min(8, 'Min. number of characters is 8.')
+      .max(16, 'Max. number of characters is 16.'),
     repeatPassword: Yup.string()
-      .required('Passwords must be the same')
-      .test('passwords-match', 'Passwords must be the same', function (value) {
+      .required('Passwords must be the same!')
+      .test('passwords-match', 'Passwords must be the same!', function (value) {
         return this.parent.password === value;
       }),
     firstName: Yup.string()
       .required('First name is required!')
-      .min(3, t('Min. number of characters is 3'))
-      .max(20, t('Max. number of characters is 20')),
+      .min(3, t('Min. number of characters is 3.'))
+      .max(20, t('Max. number of characters is 20.')),
     lastName: Yup.string()
       .required('Last name is required!')
-      .min(3, t('Min. number of characters is 3'))
-      .max(30, t('Max. number of characters is 30')),
-    age: Yup.number().required('Age is required!').min(10, 'Min. age is 10').max(99, 'Max. age is 99'),
+      .min(3, t('Min. number of characters is 3.'))
+      .max(30, t('Max. number of characters is 30.')),
+    age: Yup.number().required('Age is required!').min(10, 'Min. age is 10.').max(99, 'Max. age is 99.'),
   });
 
   const initialValues: IUserFormValues = {
@@ -167,7 +167,7 @@ const UserForm = ({ interests, type }: IUserFormProps) => {
           ))}
       </div>
       <div className={styles.UserForm__error} style={{ marginBottom: '0.5rem' }}>
-        {touched.interests && formik.values.interests.length === 0 ? t('Min. number of interests is 1') : null}
+        {touched.interests && formik.values.interests.length === 0 ? t('Min. number of interests is 1.') : null}
       </div>
 
       <SubmitButton type='submit' text='Register' />

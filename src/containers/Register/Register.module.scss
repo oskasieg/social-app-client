@@ -1,12 +1,11 @@
 .Register {
-  width: 100%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
-  margin: 8vh 2rem;
+  margin-top: 5vh;
+  width: 80%;
   padding: 1rem 0;
-  background-color: #d0d0ff;
   border-radius: 8px;
 
   &__title {

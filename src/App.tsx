@@ -7,7 +7,7 @@ import LoginForm from './components/LoginForm/LoginForm';
 import { useDispatch } from 'react-redux';
 import { getProfileAction } from './containers/Profile/actions';
 import { getCookie } from './lib/cookie';
-import MainPage from './components/MainPage/MainPage';
+import MainPage from './containers/Posts/Posts';
 import history from './lib/history';
 import Profile from './containers/Profile/Profile';
 import EditProfile from './containers/Profile/EditProfile/EditProfile';

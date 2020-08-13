@@ -34,8 +34,10 @@ function* signIn(action: ISignUpAction) {
       yield call(forwardTo, '/profile');
 
       yield put(signInUpSuccessed(json.user));
-    } else {
-      showNotification('danger', 'Error', "Can't log in!");
+    } else if (response.status === 401) {
+      showNotification('danger', 'Error', 'Invalid login!');
+    } else if (response.status === 402) {
+      showNotification('danger', 'Error', 'Invalid password!');
     }
   } catch (e) {
     throw new Error(e);
@@ -80,10 +82,9 @@ function* editProfile(action: IEditProfileAction) {
     if (response.status === 200) {
       const json = yield response.json();
 
-      showNotification('info', 'Information', 'You have edited the profile!');
-
       yield put(signInUpSuccessed(json));
     }
+    showNotification('info', 'Information', 'You have edited the profile!');
   } catch (e) {
     throw new Error(e);
   }

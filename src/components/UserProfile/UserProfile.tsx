@@ -17,6 +17,8 @@ const UserProfile = ({ user }: IUserProfileProps) => {
 
   return (
     <div className={styles.UserProfile}>
+      <div className={styles.UserProfile__row}>Login: {user.login}</div>
+
       <div className={styles.UserProfile__avatar}>
         <img src={user.avatar ? user.avatar : avatar} alt='avatar'></img>
       </div>

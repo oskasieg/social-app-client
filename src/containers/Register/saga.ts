@@ -34,7 +34,7 @@ function* signUp(action: ISignUpAction) {
 
       yield put(signUpSuccessed(json.user));
     } else {
-      showNotification('danger', 'Error', "Can't created an account!");
+      showNotification('danger', 'Error', 'User with that login exist!');
     }
   } catch (e) {
     throw new Error(e);

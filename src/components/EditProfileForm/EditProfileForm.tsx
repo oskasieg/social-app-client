@@ -14,6 +14,7 @@ import defaultAvatar from '../../assets/avatar.png';
 import SubmitButton from '../SubmitButton/SubmitButton';
 import CancelButton from '../CancelButton/CancelButton';
 import { showNotification } from '../../lib/notifications';
+import * as Yup from 'yup';
 
 const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
   const { t } = useTranslation();
@@ -26,6 +27,23 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
   const [passwordInput, setPasswordInput] = useState<boolean>(false);
 
   const [avatar, setAvatar] = useState<string>(user.avatar || ' ');
+
+  const validationSchema = Yup.object().shape({
+    firstName: Yup.string()
+      .required('First name is required!')
+      .min(3, t('Min. number of characters is 3.'))
+      .max(20, t('Max. number of characters is 20.')),
+    lastName: Yup.string()
+      .required('Last name is required!')
+      .min(3, t('Min. number of characters is 3.'))
+      .max(30, t('Max. number of characters is 30.')),
+    age: Yup.number().required('Age is required!').min(10, 'Min. age is 10.').max(99, 'Max. age is 99.'),
+    currentPassword: Yup.string().min(8, 'Min. number of characters is 8.').max(16, 'Max. number of characters is 16.'),
+    newPassword: Yup.string().min(8, 'Min. number of characters is 8.').max(16, 'Max. number of characters is 16.'),
+    repeatNewPassword: Yup.string().test('match-password', 'Password must be the same!', function (value) {
+      return this.parent.newPassword === value;
+    }),
+  });
 
   const initialValues: IEditProfileFormValues = {
     firstName: user.firstName,
@@ -41,13 +59,18 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
 
   const formik = useFormik({
     initialValues,
+    validationSchema,
     onSubmit: (values) => {
       const cookieExist = getCookie();
 
       if (cookieExist) {
         const cookie = JSON.parse(getCookie() || '');
-
-        dispatcher(editProfileAction({ ...values, login: cookie.login }, cookie.token));
+        dispatcher(
+          editProfileAction(
+            { ...values, login: cookie.login, interests: values.interests.length > 0 ? values.interests : user.interests },
+            cookie.token
+          )
+        );
       }
 
       forwardTo('/profile');
@@ -56,6 +79,7 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
 
   const cancelForm = () => {
     formik.setValues(initialValues);
+    showNotification('warning', 'Warning', 'Default values have been set.');
   };
 
   const cancelInput = (name: string, value: string) => {
@@ -81,6 +105,9 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
     if (response.status === 200 && formik.values.newPassword === formik.values.repeatNewPassword) {
       formik.setFieldValue('password', formik.values.newPassword);
       setPasswordInput(false);
+      showNotification('info', 'Information', 'Password changed successfully.');
+    } else if (response.status === 402) {
+      showNotification('danger', 'Error', 'Invalid current password!');
     }
   };
 
@@ -110,6 +137,8 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
     // eslint-disable-next-line
   }, [user]);
 
+  const { setFieldTouched, errors, touched } = formik;
+
   return (
     <form className={styles.EditProfileForm} onSubmit={formik.handleSubmit}>
       <div className={styles.EditProfileForm__title}>{t('Avatar')}</div>
@@ -138,9 +167,11 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
           <>
             <input
               name='firstName'
+              autoComplete='off'
               type='text'
               className={styles.EditProfileForm__input}
               onChange={formik.handleChange}
+              onClick={() => setFieldTouched('firstName')}
               value={formik.values.firstName}
             />
             <button type='button' className={styles.EditProfileForm__button} onClick={() => setFirstNameInput(false)}>
@@ -156,6 +187,7 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
             >
               {t('Cancel')}
             </button>
+            {errors.firstName && touched.firstName ? <div className={styles.EditProfileForm__error}>{t(errors.firstName)}</div> : null}
           </>
         )}
       </div>
@@ -176,9 +208,11 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
           <>
             <input
               name='lastName'
+              autoComplete='off'
               type='text'
               className={styles.EditProfileForm__input}
               onChange={formik.handleChange}
+              onClick={() => setFieldTouched('lastName')}
               value={formik.values.lastName}
             />
             <button type='button' className={styles.EditProfileForm__button} onClick={() => setLastNameInput(false)}>
@@ -194,6 +228,7 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
             >
               {t('Cancel')}
             </button>
+            {errors.lastName && touched.lastName ? <div className={styles.EditProfileForm__error}>{t(errors.lastName)}</div> : null}
           </>
         )}
       </div>
@@ -218,6 +253,8 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
               className={styles.EditProfileForm__input}
               onChange={formik.handleChange}
               value={formik.values.age}
+              autoComplete='off'
+              onClick={() => setFieldTouched('age')}
             />
             <button type='button' className={styles.EditProfileForm__button} onClick={() => setAgeInput(false)}>
               {t('Save')}
@@ -232,6 +269,7 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
             >
               {t('Cancel')}
             </button>
+            {errors.age && touched.age ? <div className={styles.EditProfileForm__error}>{t(errors.age)}</div> : null}
           </>
         )}
       </div>
@@ -255,11 +293,15 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
               autoComplete='off'
               className={styles.EditProfileForm__input}
               onChange={formik.handleChange}
+              onClick={() => setFieldTouched('currentPassword')}
               value={formik.values.currentPassword}
             />
             <button type='button' className={styles.EditProfileForm__button} onClick={() => savePassword()}>
               {t('Save')}
             </button>
+            {errors.currentPassword && touched.currentPassword ? (
+              <div className={styles.EditProfileForm__error}>{t(errors.currentPassword)}</div>
+            ) : null}
           </div>
           <label htmlFor='password' className={styles.EditProfileForm__label}>
             {t('New password')}
@@ -271,12 +313,23 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
               autoComplete='off'
               className={styles.EditProfileForm__input}
               onChange={formik.handleChange}
+              onClick={() => setFieldTouched('newPassword')}
               value={formik.values.newPassword}
             />
-            <button type='button' className={styles.EditProfileForm__buttonCancel} onClick={() => setPasswordInput(false)}>
+            <button
+              type='button'
+              className={styles.EditProfileForm__buttonCancel}
+              onClick={() => {
+                formik.setFieldValue('newPassword', '');
+                formik.setFieldValue('repeatNewPassword', '');
+                formik.setFieldValue('currentPassword', '');
+                setPasswordInput(false);
+              }}
+            >
               {t('Cancel')}
             </button>
           </div>
+          {errors.newPassword && touched.newPassword ? <div className={styles.EditProfileForm__error}>{t(errors.newPassword)}</div> : null}
           <div className={styles.EditProfileForm__row}>
             <label htmlFor='password' className={styles.EditProfileForm__label}>
               {t('Repeat new password')}
@@ -287,9 +340,13 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
               autoComplete='off'
               className={styles.EditProfileForm__input}
               onChange={formik.handleChange}
+              onClick={() => setFieldTouched('repeatNewPassword')}
               value={formik.values.repeatNewPassword}
             />
           </div>
+          {errors.repeatNewPassword && touched.repeatNewPassword ? (
+            <div className={styles.EditProfileForm__error}>{t(errors.repeatNewPassword)}</div>
+          ) : null}
         </>
       )}
 
@@ -306,7 +363,7 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
 
       <div className={styles.EditProfileForm__row} style={{ justifyContent: 'space-evenly', marginTop: '0.5rem' }}>
         <SubmitButton text='Save' type='submit' />
-        <CancelButton text='Cancel' type='button' onClick={cancelForm} />
+        <CancelButton text='Reset' type='button' onClick={cancelForm} />
       </div>
     </form>
   );
