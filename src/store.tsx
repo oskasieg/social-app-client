@@ -6,7 +6,7 @@ import registerSaga from './containers/Register/saga';
 import profileSaga from './containers/Profile/saga';
 import postsSaga from './containers/Posts/saga';
 import { all } from 'redux-saga/effects';
-import { IUserProfile } from './containers/Profile/types';
+import { IUserProfile, IOtherUserProfile } from './containers/Profile/types';
 import { GET_MANY_POSTS_REQUEST } from './containers/Posts/contants';
 import { IPost } from './containers/Posts/types';
 
@@ -20,6 +20,7 @@ export interface IStoreType {
   profileReducer: {
     user: IUserProfile;
     isLogged: boolean;
+    userProfile: IOtherUserProfile;
   };
   postsReducer: {
     posts: IPost[];

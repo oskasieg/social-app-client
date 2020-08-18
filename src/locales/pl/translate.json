@@ -53,5 +53,21 @@
   "Add comment": "Dodaj komentarz",
   "Send": "Wyślij",
   "User": "Użytkownik",
-  "added a new post.": "dodał nowy post."
+  "added a new post.": "dodał nowy post.",
+  "Wanna add new post?": "Chcesz dodać nowy post?",
+  "Click": "Kliknij",
+  "button": "przycisk",
+  "Add post": "Dodaj post",
+  "Post form": "Formularz tworzenia posta",
+  "Title": "Tytuł",
+  "Text": "Treść",
+  "Photos": "Zdjęcia",
+  "Tags": "Tagi",
+  "Add": "Dodaj",
+  "Text is required!": "Treść jest wymagana!",
+  "Title is required!": "Tytuł jest wymagany!",
+  "Min. number of tags is 1.": "Minimalna liczba tagów to 1",
+  "Min. number of characters is 10.": "Minimalna liczba znaków to 10.",
+  "Min. number of characters is 5.": "Minimalna liczba znaków to 5.",
+  "Max. number of characters is 200.": "Maksymalna liczba znaków to 200."
 }

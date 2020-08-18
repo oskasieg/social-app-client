@@ -1,0 +1,23 @@
+TASKI:
+
+1. Formularz dodawania posta:
+    - ustalic potrzebne pola, stworzyc formularz, wyslac na serwer, serwer dodaje post. OK
+
+2. Widok moich postów:
+    - lista postów użytkownika, zamiast tego: 'user added ...' dać przyciski do edycji lub usunięcia.
+
+3. Formularz edycji posta:
+    - najlepiej wykorzystac formularz tworzenia posta,
+    - idzie caly edytowany post na serwer i serwer robi update.
+
+4. System lików i komantarze:
+    - wysyła akcje edycji posta (dokleja komentarz lub reakcje do posta i wysyla akcje edycji profilu). OK
+
+5. Widok profilu użytkownika:
+    - wszedzie gdzie na stronie jest avatar i login użytkownika jest Linkiem do tego widoku. OK
+
+6. Style responsywne.
+
+7. Endpoint na pobranie profilu uzytkownika. OK
+
+8. Statystyki - like, fallowers, posty

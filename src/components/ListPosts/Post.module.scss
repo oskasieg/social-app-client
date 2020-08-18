@@ -1,5 +1,5 @@
 .Post {
-  margin-top: 3rem;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   padding: 0.5rem;
@@ -72,9 +72,21 @@
   &__likes {
     position: relative;
     color: blue;
-    margin-left: 1.6rem;
     display: flex;
     align-items: center;
+  }
+
+  &__like {
+    width: 20px;
+    height: 20px;
+  }
+
+  &__like:first-of-type {
+    margin-left: 0.3rem;
+  }
+
+  &__like:last-of-type {
+    margin: 0 0.3rem;
   }
 
   &__likes::before {
@@ -82,7 +94,6 @@
     height: 20px;
     position: absolute;
     right: 13px;
-    content: url('../../assets/like.svg');
   }
 
   &__plus {
@@ -159,6 +170,7 @@
     height: 15px;
     padding: 0.5rem;
     margin: 0px;
+    resize: none;
   }
 }
 

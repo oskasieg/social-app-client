@@ -1,0 +1,14 @@
+.OtherProfile {
+  margin-top: 5vh;
+  width: 80%;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+
+  &__title {
+    width: 90%;
+    text-align: center;
+    border-bottom: 1px blue solid;
+    padding-bottom: 0.5rem;
+  }
+}

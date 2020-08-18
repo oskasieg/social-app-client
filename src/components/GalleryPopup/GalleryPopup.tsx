@@ -9,7 +9,7 @@ const GalleryPopup = ({ visible, photos, handleClose }: IGalleryPopupProps) => {
   const [activePhoto, setActivePhoto] = useState<string>(photos[0]);
 
   return (
-    <div>
+    <>
       <Modal
         aria-labelledby='transition-modal-title'
         aria-describedby='transition-modal-description'
@@ -39,7 +39,7 @@ const GalleryPopup = ({ visible, photos, handleClose }: IGalleryPopupProps) => {
           </div>
         </Fade>
       </Modal>
-    </div>
+    </>
   );
 };
 

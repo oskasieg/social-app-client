@@ -17,32 +17,32 @@ const UserProfile = ({ user }: IUserProfileProps) => {
 
   return (
     <div className={styles.UserProfile}>
-      <div className={styles.UserProfile__row}>Login: {user.login}</div>
+      <div className={styles.UserProfile__row}>Login: {user && user.login}</div>
 
       <div className={styles.UserProfile__avatar}>
-        <img src={user.avatar ? user.avatar : avatar} alt='avatar'></img>
+        <img src={user && user.avatar ? user.avatar : avatar} alt='avatar'></img>
       </div>
       <div className={styles.UserProfile__stats}>
-        <div className={styles.UserProfile__stat}>P: {user.numberOfPosts}</div>
-        <div className={styles.UserProfile__stat}>L: {user.likes}</div>
-        <div className={styles.UserProfile__stat}>F: {user.followers}</div>
+        <div className={styles.UserProfile__stat}>P: {user && user.numberOfPosts}</div>
+        <div className={styles.UserProfile__stat}>L: {user && user.likes}</div>
+        <div className={styles.UserProfile__stat}>F: {user && user.followers}</div>
       </div>
       <div className={styles.UserProfile__row}>
-        {user.firstName} {user.lastName}
+        {user && user.firstName} {user && user.lastName}
       </div>
       <div className={styles.UserProfile__left}>{t('Age')}:</div>
-      <div className={styles.UserProfile__right}>{user.age}</div>
+      <div className={styles.UserProfile__right}>{user && user.age}</div>
       <div className={styles.UserProfile__left} style={{ width: '100%' }}>
         {t('Interests')}:
       </div>
       <div className={styles.UserProfile__interests}>
-        {user.interests && user.interests.map((interest: string) => <Interest key={interest} interest={interest} />)}
+        {user && user.interests && user.interests.map((interest: string) => <Interest key={interest} interest={interest} />)}
       </div>
       <div className={styles.UserProfile__line}></div>
       <div className={styles.UserProfile__left}>{t('Created at')}:</div>
-      <div className={styles.UserProfile__right}>{user.createdAt && getDate(user.createdAt)}</div>
+      <div className={styles.UserProfile__right}>{user && user.createdAt && getDate(user.createdAt)}</div>
       <div className={styles.UserProfile__left}>{t('Last login')}:</div>
-      <div className={styles.UserProfile__right}>{user.lastLogin && getDate(user.lastLogin)}</div>
+      <div className={styles.UserProfile__right}>{user && user.lastLogin && getDate(user.lastLogin)}</div>
     </div>
   );
 };

@@ -1,4 +1,11 @@
-import { GET_PROFILE_REQUEST, GET_PROFILE_SUCCESEED, LOGOUT_PROFILE, EDIT_PROFILE_REQUEST } from './contants';
+import {
+  GET_PROFILE_REQUEST,
+  GET_PROFILE_SUCCESEED,
+  LOGOUT_PROFILE,
+  EDIT_PROFILE_REQUEST,
+  GET_USER_PROFILE_REQUEST,
+  GET_USER_PROFILE_SUCCESSED,
+} from './contants';
 import { SIGN_IN_REQUEST, SIGN_IN_SUCCESSED } from './contants';
 import { IInterest } from '../Register/types';
 
@@ -17,13 +24,27 @@ export interface IUserProfile {
   password: string;
 }
 
+export interface IOtherUserProfile {
+  login: string;
+  firstName: string;
+  lastName: string;
+  age: number;
+  interests: string[];
+  followers: string;
+  avatar: string;
+  likes: number;
+  numberOfPosts: number;
+  createdAt: Date;
+  lastLogin: Date;
+}
+
 export interface ILoginFormValues {
   login: string;
   password: string;
 }
 
 export interface IUserProfileProps {
-  user: IUserProfile;
+  user: IUserProfile | IOtherUserProfile;
 }
 
 // REDUX
@@ -60,4 +81,14 @@ export interface IGetProfileSuccessed {
   user: IUserProfile;
 }
 
-export type IProfileReducerAction = IGetProfileAction | ISignInSuccessed;
+export interface IGetUserProfileAction {
+  type: typeof GET_USER_PROFILE_REQUEST;
+  login: string;
+}
+
+export interface IGetUserProfileSuccessed {
+  type: typeof GET_USER_PROFILE_SUCCESSED;
+  user: IOtherUserProfile;
+}
+
+export type IProfileReducerAction = IGetProfileAction | ISignInSuccessed | IGetUserProfileSuccessed;
