@@ -7,15 +7,16 @@ import LoginForm from './components/LoginForm/LoginForm';
 import { useDispatch } from 'react-redux';
 import { getProfileAction } from './containers/Profile/actions';
 import { getCookie } from './lib/cookie';
-import MainPage from './containers/Posts/Posts';
+import Posts from './containers/Posts/Posts';
 import history from './lib/history';
 import Profile from './containers/Profile/Profile';
 import EditProfile from './containers/Profile/EditProfile/EditProfile';
 import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import PostForm from './components/PostForm/PostForm';
-import UserProfile from './components/UserProfile/UserProfile';
-import OtherProfile from './containers/Profile/UserProfile/OtherProfile';
+import OtherProfile from './containers/Profile/OtherProfile/OtherProfile';
+import ManagePosts from './containers/Posts/ManagePosts/ManagePosts';
+import EditPost from './containers/Posts/EditPost/EditPost';
 
 const App = () => {
   const dispatcher = useDispatch();
@@ -35,7 +36,7 @@ const App = () => {
       <Router history={history}>
         <Header />
         <Switch>
-          <Route exact path='/' component={MainPage} />
+          <Route exact path='/' component={Posts} />
 
           <Route exact path='/profile' component={Profile} />
           <Route path='/profile/edit' component={EditProfile} />
@@ -43,7 +44,9 @@ const App = () => {
           <Route path='/register' component={Register} />
           <Route path='/login' component={LoginForm} />
 
-          <Route path='/post' component={PostForm} />
+          <Route path='/posts' component={ManagePosts} />
+          <Route path='/post/add' component={PostForm} />
+          <Route path='/post/edit/:title' component={EditPost} />
         </Switch>
       </Router>
     </div>

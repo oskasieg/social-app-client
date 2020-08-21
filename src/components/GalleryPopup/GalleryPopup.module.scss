@@ -15,10 +15,15 @@
     padding: 0.2rem;
     align-items: center;
     width: 98%;
+
+    @media (min-width: 600px) {
+      width: auto;
+      padding: 1rem;
+    }
   }
 
   &__photo {
-    max-width: 100%;
+    max-width: 85%;
     height: auto;
   }
 
@@ -32,6 +37,7 @@
     width: auto;
     height: 70px;
     opacity: 0.5;
+    cursor: pointer;
   }
 
   &__smallPhotoActive {
@@ -39,5 +45,6 @@
     width: auto;
     height: 70px;
     border: solid 1px blue;
+    cursor: pointer;
   }
 }

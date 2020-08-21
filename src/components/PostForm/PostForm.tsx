@@ -9,10 +9,10 @@ import { IInterest } from '../../containers/Register/types';
 import InterestCheckbox from '../InterestCheckbox/InterestCheckbox';
 import SubmitButton from '../SubmitButton/SubmitButton';
 import plus from '../../assets/plus.svg';
-import { addPostAction } from '../../containers/Posts/actions';
-import { IPostFormValues } from './types';
+import { addPostAction, editPostAction } from '../../containers/Posts/actions';
+import { IPostFormValues, IPostFormProps } from './types';
 
-const PostForm = () => {
+const PostForm = ({ type, post }: IPostFormProps) => {
   const dispatcher = useDispatch();
 
   const [firstPhoto, setFirstPhoto] = useState<string>('');
@@ -57,18 +57,44 @@ const PostForm = () => {
     text: '',
     photos: [],
     tags: [],
+    likes: [],
+    sumLikes: 0,
+    comments: [],
+    createdAt: new Date(),
+    editedAt: new Date(),
   };
 
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: (values) => {
-      if (values.tags.length === 0) formik.setFieldError('tags', 'Min. number of tags is 1.');
-      else dispatcher(addPostAction(values));
+      if (values.tags.length === 0) formik.setFieldError('tags', t('Min. number of tags is 1.'));
+      else if (type === 'edit') {
+        console.log(values.photos);
+        dispatcher(editPostAction(values, 'edit'));
+      } else dispatcher(addPostAction(values));
     },
   });
 
   const { handleChange, handleSubmit, setFieldTouched, values, errors, touched, setFieldValue } = formik;
+
+  useEffect(() => {
+    if (post && post.title) setFieldValue('title', post.title);
+    if (post && post.text) setFieldValue('text', post.text);
+    if (post && post.photos) setFieldValue('photos', post.photos);
+    if (post && post.tags) setFieldValue('tags', post.tags);
+    if (post && post.likes) setFieldValue('likes', post.likes);
+    if (post && post.sumLikes) setFieldValue('sumLikes', post.sumLikes);
+    if (post && post.comments) setFieldValue('comments', post.comments);
+    if (post && post.createdAt) setFieldValue('createdAt', post.createdAt);
+    if (post && post.editedAt) setFieldValue('editedAt', post.editedAt);
+    // if (post && post.photos) {
+    //   const photos = post.photos;
+    //   if (photos[0]) setFirstPhoto(photos[0]);
+    //   if (photos[1]) setSecondPhoto(photos[1]);
+    //   if (photos[2]) setThirdPhoto(photos[2]);
+    // }
+  }, [post, setFieldValue]);
 
   useEffect(() => {
     setFieldValue('authorLogin', authorLogin);
@@ -118,13 +144,15 @@ const PostForm = () => {
 
   return (
     <div className={styles.PostForm}>
-      <div className={styles.PostForm__title}>{t('Post form')}</div>
+      {type === 'edit' && <div className={styles.PostForm__title}>{t('Edit post form')}</div>}
+      {type !== 'edit' && <div className={styles.PostForm__title}>{t('Post form')}</div>}
 
       <form onSubmit={handleSubmit} className={styles.PostForm__container}>
         <label htmlFor='title' className={styles.PostForm__label}>
           {t('Title')}
         </label>
         <input
+          disabled={type === 'edit'}
           autoComplete='off'
           name='title'
           type='text'
@@ -191,7 +219,8 @@ const PostForm = () => {
 
         <div className={styles.PostForm__line} />
 
-        <SubmitButton text='Add' type='submit' />
+        {type === 'edit' && <SubmitButton type='submit' text='Save' />}
+        {type !== 'edit' && <SubmitButton text='Add' type='submit' />}
       </form>
     </div>
   );

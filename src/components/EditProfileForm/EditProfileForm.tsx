@@ -40,7 +40,7 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
     age: Yup.number().required('Age is required!').min(10, 'Min. age is 10.').max(99, 'Max. age is 99.'),
     currentPassword: Yup.string().min(8, 'Min. number of characters is 8.').max(16, 'Max. number of characters is 16.'),
     newPassword: Yup.string().min(8, 'Min. number of characters is 8.').max(16, 'Max. number of characters is 16.'),
-    repeatNewPassword: Yup.string().test('match-password', 'Password must be the same!', function (value) {
+    repeatNewPassword: Yup.string().test('match-password', 'Passwords must be the same!', function (value) {
       return this.parent.newPassword === value;
     }),
   });
@@ -105,7 +105,6 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
     if (response.status === 200 && formik.values.newPassword === formik.values.repeatNewPassword) {
       formik.setFieldValue('password', formik.values.newPassword);
       setPasswordInput(false);
-      showNotification('info', 'Information', 'Password changed successfully.');
     } else if (response.status === 402) {
       showNotification('danger', 'Error', 'Invalid current password!');
     }
@@ -199,7 +198,7 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
         {!lastNameInput && (
           <>
             <div className={styles.EditProfileForm__field}>{formik.values.lastName}</div>
-            <button className={styles.EditProfileForm__button} onClick={() => setLastNameInput(true)}>
+            <button type='button' className={styles.EditProfileForm__button} onClick={() => setLastNameInput(true)}>
               {t('Edit')}
             </button>
           </>
@@ -240,7 +239,7 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
         {!ageInput && (
           <>
             <div className={styles.EditProfileForm__field}>{formik.values.age}</div>
-            <button className={styles.EditProfileForm__button} onClick={() => setAgeInput(true)}>
+            <button type='button' className={styles.EditProfileForm__button} onClick={() => setAgeInput(true)}>
               {t('Edit')}
             </button>
           </>
@@ -277,7 +276,7 @@ const EditProfileForm = ({ user, interests }: IEditProfileFormProps) => {
       <div className={styles.EditProfileForm__line} />
       <div className={styles.EditProfileForm__title}>{t('Password')}</div>
       {!passwordInput && (
-        <button onClick={() => setPasswordInput(true)} className={styles.EditProfileForm__button}>
+        <button type='button' onClick={() => setPasswordInput(true)} className={styles.EditProfileForm__button}>
           {t('Edit password')}
         </button>
       )}

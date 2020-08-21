@@ -7,7 +7,6 @@ import profileSaga from './containers/Profile/saga';
 import postsSaga from './containers/Posts/saga';
 import { all } from 'redux-saga/effects';
 import { IUserProfile, IOtherUserProfile } from './containers/Profile/types';
-import { GET_MANY_POSTS_REQUEST } from './containers/Posts/contants';
 import { IPost } from './containers/Posts/types';
 
 declare global {
@@ -24,6 +23,7 @@ export interface IStoreType {
   };
   postsReducer: {
     posts: IPost[];
+    post: IPost;
   };
 }
 

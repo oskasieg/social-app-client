@@ -1,7 +1,7 @@
-.MainPage {
+.Posts {
   display: flex;
-  width: 100%;
+  flex-wrap: wrap;
+  max-width: 800px;
   justify-content: center;
-  margin-top: 1rem;
   margin-bottom: 2rem;
 }

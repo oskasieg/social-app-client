@@ -42,8 +42,8 @@ const Header = () => {
   };
 
   return (
-    <header className={styles.Header} style={menuVisible ? { borderBottom: '1px solid black', boxShadow: 'none' } : {}}>
-      <Link className={styles.Header__logo} to='/'>
+    <header className={styles.Header}>
+      <Link onClick={() => setMenuVisible(false)} className={styles.Header__logo} to='/'>
         All or nothing
       </Link>
       <div className={styles.Header__menu} onClick={() => setMenuVisible(!menuVisible)}>
@@ -67,6 +67,9 @@ const Header = () => {
             </Link>
             <Link className={styles.Header__option} to='/profile/edit' onClick={() => setMenuVisible(!menuVisible)}>
               {t('Edit profile')}
+            </Link>
+            <Link className={styles.Header__option} to='/posts' onClick={() => setMenuVisible(!menuVisible)}>
+              {t('Manage posts')}
             </Link>
             <Link className={styles.Header__option} to='/' onClick={logoutProfile} style={{ color: 'red' }}>
               {t('Logout')}

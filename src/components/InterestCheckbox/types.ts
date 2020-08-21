@@ -1,4 +1,5 @@
 import { ChangeEvent } from 'react';
+import { IInterest } from '../../containers/Register/types';
 
 export interface IInterestCheckboxProps {
   name: string;

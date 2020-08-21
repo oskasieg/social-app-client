@@ -6,28 +6,36 @@
   align-items: center;
   margin: 8vh 2rem;
   padding: 1rem 0;
-  background-color: #d0d0ff;
-  border-radius: 8px;
 
   &__title {
-    width: 90%;
+    width: 200px;
     text-align: center;
     border-bottom: 1px blue solid;
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
+
+    @media (min-width: 750px) {
+      font-size: 1.3em;
+      width: 450px;
+      border-bottom: solid blue 1px;
+      width: 200px;
+    }
   }
 
   &__form {
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #d0d0ff;
+    border-radius: 8px;
     justify-content: center;
+    padding: 1rem;
   }
 
   &__label {
+    color: blue;
+    margin-top: 0.5rem;
     align-self: flex-start;
-    margin: 0 0.5rem;
   }
 
   &__input,

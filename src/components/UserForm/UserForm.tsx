@@ -160,7 +160,13 @@ const UserForm = ({ interests, type }: IUserFormProps) => {
       <label htmlFor='interests' className={styles.UserForm__label}>
         {t('Interests')}
       </label>
-      <div className={styles.UserForm__tags} onClick={() => setFieldTouched('interests')}>
+      <div
+        className={styles.UserForm__tags}
+        onClick={() => {
+          formik.setFieldError('interests', 'Min. number of interests is 1.');
+          setFieldTouched('interests');
+        }}
+      >
         {interests &&
           interests.map((interest: IInterest) => (
             <InterestCheckbox key={interest.name} name='interests' value={interest.name} onChange={formik.handleChange} />

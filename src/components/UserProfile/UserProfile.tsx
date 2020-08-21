@@ -32,7 +32,7 @@ const UserProfile = ({ user }: IUserProfileProps) => {
       </div>
       <div className={styles.UserProfile__left}>{t('Age')}:</div>
       <div className={styles.UserProfile__right}>{user && user.age}</div>
-      <div className={styles.UserProfile__left} style={{ width: '100%' }}>
+      <div className={styles.UserProfile__subtitle} style={{ width: '100%' }}>
         {t('Interests')}:
       </div>
       <div className={styles.UserProfile__interests}>

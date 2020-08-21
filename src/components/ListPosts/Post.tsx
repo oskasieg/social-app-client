@@ -9,13 +9,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import like from '../../assets/like.svg';
 import unlike from '../../assets/unlike.svg';
 import { IStoreType } from '../../store';
-import { editPostAction } from '../../containers/Posts/actions';
+import { editPostAction, deletePostAction } from '../../containers/Posts/actions';
 import { showNotification } from '../../lib/notifications';
 import avatar from '../../assets/avatar.png';
 import { Link } from 'react-router-dom';
+import CancelButton from '../CancelButton/CancelButton';
+import SubmitButton from '../SubmitButton/SubmitButton';
+import Popup from '../Popup/Popup';
 
-const Post = ({ post }: IPostProps) => {
+const Post = ({ post, type }: IPostProps) => {
   const { t } = useTranslation();
+
+  const componentType = type;
 
   const dispatcher = useDispatch();
 
@@ -25,6 +30,7 @@ const Post = ({ post }: IPostProps) => {
   const [commentsVisible, setCommentsVisible] = useState<boolean>(false);
   const [galleryPopupVisible, setGalleryPopupVisible] = useState<boolean>(false);
   const [likesPopupVisible, setLikesPopupVisible] = useState<boolean>(false);
+  const [popupVisible, setPopupVisible] = useState<boolean>(false);
 
   const [comment, setComment] = useState<string>('');
 
@@ -36,6 +42,8 @@ const Post = ({ post }: IPostProps) => {
   };
 
   const likeAction = (type: string) => {
+    if (componentType === 'edit') return;
+
     if (isLogged) {
       const likeExist = post.likes.find((like: ILike) => like.author === user.login);
 
@@ -63,6 +71,13 @@ const Post = ({ post }: IPostProps) => {
           dispatcher(editPostAction(post, 'like'));
           return;
         }
+
+        if (like.kind === type) {
+          const index = post.likes.indexOf(like);
+          post.likes.splice(index, 3);
+          dispatcher(editPostAction(post, 'like'));
+          return;
+        }
       }
     } else {
       showNotification('warning', 'Warning', 'To add likes you must sign in!');
@@ -81,6 +96,10 @@ const Post = ({ post }: IPostProps) => {
     }
   };
 
+  const deletePost = () => {
+    dispatcher(deletePostAction(user.login, post.title));
+  };
+
   return (
     <div className={styles.Post}>
       {galleryPopupVisible && post.photos.length > 0 && (
@@ -91,11 +110,30 @@ const Post = ({ post }: IPostProps) => {
         <LikesPopup likes={post.likes} visible={likesPopupVisible} handleClose={() => setLikesPopupVisible(false)} />
       )}
 
+      {popupVisible && <Popup visible={popupVisible} handleClose={() => setPopupVisible(false)} handleSubmit={deletePost} />}
+
       <div className={styles.Post__header}>
-        <div className={styles.Post__left}>
-          {t('User')} <span style={{ fontWeight: 'bold', margin: '0 0.2rem' }}>{post.authorLogin}</span> {t('added a new post.')}
-        </div>
-        <div className={styles.Post__right}>{getDate(post.createdAt)}</div>
+        {type === 'default' && (
+          <>
+            <div className={styles.Post__left}>
+              {t('User')} <span style={{ fontWeight: 'bold', margin: '0 0.2rem' }}>{post.authorLogin}</span> {t('added a new post.')}
+            </div>
+            <div className={styles.Post__right}>{getDate(post.createdAt)}</div>
+          </>
+        )}
+
+        {type === 'edit' && (
+          <>
+            <div className={styles.Post__button}>
+              <Link to={`/post/edit/${post.title}`}>
+                <SubmitButton type='button' text='Edit' />
+              </Link>
+            </div>
+            <div className={styles.Post__button}>
+              <CancelButton onClick={() => setPopupVisible(true)} type='button' text='Delete' />
+            </div>
+          </>
+        )}
       </div>
 
       <div className={styles.Post__title}>{post.title}</div>
@@ -117,19 +155,29 @@ const Post = ({ post }: IPostProps) => {
         <div className={styles.Post__likes}>
           <img
             style={post.likes.find((like: ILike) => like.author === user.login)?.kind === 'minus' ? { opacity: '0.5' } : {}}
-            onClick={() => likeAction('plus')}
+            onClick={() => {
+              if (type === 'default') likeAction('plus');
+            }}
             className={styles.Post__like}
             src={like}
             alt='like'
           />
-          <img
-            style={post.likes.find((like: ILike) => like.author === user.login)?.kind === 'plus' ? { opacity: '0.5' } : {}}
-            onClick={() => likeAction('minus')}
-            className={styles.Post__like}
-            src={unlike}
-            alt='unlike'
-          />
-          <div style={post.sumLikes < 0 ? { color: 'red' } : { color: 'green' }} onClick={() => setLikesPopupVisible(true)}>
+          {type === 'default' && (
+            <img
+              style={post.likes.find((like: ILike) => like.author === user.login)?.kind === 'plus' ? { opacity: '0.5' } : {}}
+              onClick={() => likeAction('minus')}
+              className={styles.Post__like}
+              src={unlike}
+              alt='unlike'
+            />
+          )}
+          <div
+            className={styles.Post__likesButton}
+            style={post.sumLikes < 0 ? { color: 'red' } : { color: 'green' }}
+            onClick={() => {
+              if (post.likes.length > 0) setLikesPopupVisible(true);
+            }}
+          >
             {post.sumLikes}
           </div>
         </div>
@@ -146,18 +194,17 @@ const Post = ({ post }: IPostProps) => {
 
       {commentsVisible && (
         <>
-          <div className={styles.Post__addComment}>
-            <div className={styles.Post__commentTitle}>{t('Add comment')}:</div>
-            <textarea
-              value={comment}
-              className={styles.Post__textarea}
-              onChange={(e: React.FormEvent<HTMLTextAreaElement>) => setComment(e.currentTarget.value)}
-            />
-            <button onClick={commentAction} type='button'>
-              {t('Send')}
-            </button>
-          </div>
-
+          {componentType === 'default' && (
+            <div className={styles.Post__addComment}>
+              <div className={styles.Post__commentTitle}>{t('Add comment')}:</div>
+              <textarea
+                value={comment}
+                className={styles.Post__textarea}
+                onChange={(e: React.FormEvent<HTMLTextAreaElement>) => setComment(e.currentTarget.value)}
+              />
+              <SubmitButton onClick={() => commentAction()} type='button' text='Send' />
+            </div>
+          )}
           <div className={styles.Post__comments}>
             {post.comments.map((comment: IComment, index: number) => (
               <div key={index} className={styles.Post__comment}>
