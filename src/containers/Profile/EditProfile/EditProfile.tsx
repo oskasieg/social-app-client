@@ -5,12 +5,19 @@ import { IInterest } from '../../Register/types';
 import { useSelector } from 'react-redux';
 import { IStoreType } from '../../../store';
 import EditProfileForm from '../../../components/EditProfileForm/EditProfileForm';
+import { forwardTo } from '../../../lib/history';
 
 const EditProfile = () => {
   const { t } = useTranslation();
 
   const [interests, setInterests] = useState<IInterest[]>([]);
   const user = useSelector((state: IStoreType) => state.profileReducer.user);
+
+  const isLogged = useSelector((state: IStoreType) => state.profileReducer.isLogged);
+
+  useEffect(() => {
+    if (!isLogged) forwardTo('/');
+  }, [isLogged]);
 
   useEffect(() => {
     const fetchInterests = async () => {

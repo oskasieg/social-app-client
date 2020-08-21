@@ -6,6 +6,7 @@ import UserProfile from '../../components/UserProfile/UserProfile';
 import { useTranslation } from 'react-i18next';
 import { getProfileAction } from './actions';
 import { getCookie } from '../../lib/cookie';
+import { forwardTo } from '../../lib/history';
 
 const Profile = () => {
   const { t } = useTranslation();
@@ -13,6 +14,12 @@ const Profile = () => {
   const dispatcher = useDispatch();
 
   const user = useSelector((state: IStoreType) => state.profileReducer.user);
+
+  const isLogged = useSelector((state: IStoreType) => state.profileReducer.isLogged);
+
+  useEffect(() => {
+    if (!isLogged) forwardTo('/');
+  }, [isLogged]);
 
   useEffect(() => {
     const cookieExist = getCookie();

@@ -11,6 +11,7 @@ import SubmitButton from '../SubmitButton/SubmitButton';
 import plus from '../../assets/plus.svg';
 import { addPostAction, editPostAction } from '../../containers/Posts/actions';
 import { IPostFormValues, IPostFormProps } from './types';
+import { forwardTo } from '../../lib/history';
 
 const PostForm = ({ type, post }: IPostFormProps) => {
   const dispatcher = useDispatch();
@@ -26,6 +27,12 @@ const PostForm = ({ type, post }: IPostFormProps) => {
   const [tags, setTags] = useState<IInterest[]>([]);
 
   const { t } = useTranslation();
+
+  const isLogged = useSelector((state: IStoreType) => state.profileReducer.isLogged);
+
+  useEffect(() => {
+    if (!isLogged) forwardTo('/');
+  }, [isLogged]);
 
   useEffect(() => {
     const fetchTags = async () => {
