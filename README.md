@@ -2,9 +2,6 @@
 
 Aplikacja napisana w React.JS z wykorzystaniem języka programowania Typescript. Powstała w celu nabycia nowych umiejętności. Jest to aplikacja typu serwisu społecznościowego. Umożliwia wiele funkcjonalności. Możliwości rozwoju aplikacji są ogromne, ale z powodu braku czasu pozostawiam ją w takim stanie.
 
-## DEMO
-link
-
 #### Funkcjonalności
 * rejestracja, logowanie, wylogowywanie
 
@@ -49,3 +46,30 @@ ZALOGOWANI:
 
 1. npm i
 2. npm start
+
+#### Kilka zdjęć
+
+##### Strona główna (desktop):
+
+![img](https://i.ibb.co/ZBtP0jT/strona-glowna.png "Strona główna")
+
+##### Dodawanie posta (mobile): 
+
+![img](https://i.ibb.co/1J1wxvp/add-post.png "Dodawanie posta")
+
+##### Przeglądanie postów (desktop):
+
+![img](https://i.ibb.co/KWpxKyC/posty.png "Przeglądanie postów")
+
+##### Przeglądanie galerii (mobile):
+
+![img](https://i.ibb.co/5j5D61n/galeria.png "Przeglądanie galerii")
+
+##### Przeglądanie reakcji (mobile):
+
+![img](https://i.ibb.co/hHmHhpF/like.png "Przeglądanie reakcji")
+
+##### Zarządzanie postami (mobile):
+
+![img](https://i.ibb.co/GxJNCpz/manage-posts.png "Zarządzanie postami")
+
