@@ -1,0 +1,38 @@
+.Popup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__container,
+  &__container:focus {
+    background-color: #fffcfc;
+    box-shadow: 0px 0px 7px #050404;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    outline: inherit;
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  &__title {
+    font-size: 1.1em;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1r;
+    margin-top: 0.5rem;
+  }
+
+  &__button,
+  &__button:focus {
+    background-color: transparent;
+    border: none;
+    outline: inherit;
+    font-size: 1.1em;
+  }
+}

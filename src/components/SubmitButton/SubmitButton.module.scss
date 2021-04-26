@@ -1,0 +1,12 @@
+.SubmitButton,
+.SubmitButton:focus {
+  width: 100px;
+  outline: inherit;
+  padding: 0.4rem 0.5rem;
+  border-radius: 5px;
+  border: solid 1px blue;
+  background-color: white;
+  font-weight: bold;
+  color: blue;
+  cursor: pointer;
+}

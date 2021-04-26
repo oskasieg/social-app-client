@@ -1,0 +1,19 @@
+.ManagePosts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5vh;
+  max-width: 800px;
+
+  &__title {
+    width: 90%;
+    text-align: center;
+    border-bottom: 1px blue solid;
+    padding-bottom: 0.5rem;
+    @media (min-width: 750px) {
+      font-size: 1.3em;
+      width: 750px;
+      border-bottom: solid blue 1px;
+    }
+  }
+}

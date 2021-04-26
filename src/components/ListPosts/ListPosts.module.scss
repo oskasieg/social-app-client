@@ -1,0 +1,11 @@
+.ListPosts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 95%;
+
+  &__text {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+}

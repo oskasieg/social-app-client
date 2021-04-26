@@ -1,0 +1,22 @@
+.Register {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5vh;
+  width: 80%;
+  padding: 1rem 0;
+  border-radius: 8px;
+
+  &__title {
+    width: 90%;
+    text-align: center;
+    border-bottom: 1px blue solid;
+    padding-bottom: 0.5rem;
+    @media (min-width: 750px) {
+      font-size: 1.3em;
+      width: 450px;
+      border-bottom: solid blue 1px;
+    }
+  }
+}

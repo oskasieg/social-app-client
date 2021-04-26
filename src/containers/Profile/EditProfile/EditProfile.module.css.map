@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,YAAY,CAAC;EACX,UAAU,EAAE,GAAG;EACf,KAAK,EAAE,GAAG;EACV,OAAO,EAAE,IAAI;EACb,SAAS,EAAE,WAAW;EACtB,WAAW,EAAE,MAAM;CAQpB;;AANE,AAAD,mBAAQ,CAAC;EACP,KAAK,EAAE,GAAG;EACV,UAAU,EAAE,MAAM;EAClB,aAAa,EAAE,cAAc;EAC7B,cAAc,EAAE,MAAM;CACvB",
+    "sources": [
+        "EditProfile.module.scss"
+    ],
+    "names": [],
+    "file": "EditProfile.module.css"
+}

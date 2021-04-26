@@ -1,0 +1,192 @@
+.Post {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0.5rem 1rem;
+  background-color: #d5d5d56b;
+  border-radius: 10px;
+  box-shadow: 0px 0px 8px #15151552;
+
+  &__header {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__left {
+    flex-grow: 3;
+    padding: 0.2rem 0;
+  }
+
+  &__right {
+    padding: 0.2rem 0;
+    text-align: right;
+  }
+
+  &__button {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    margin: 0.5rem 0;
+  }
+
+  &__title {
+    font-size: 1.2em;
+    color: #111064;
+  }
+
+  &__content {
+    background-color: white;
+    padding: 0.5rem;
+    border-radius: 5px;
+    text-align: justify;
+    line-height: 25px;
+    margin: 0.5rem 0 0;
+  }
+
+  &__gallery {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    margin: 0.5rem 0 0;
+    cursor: pointer;
+  }
+
+  &__singlePhoto {
+    height: auto;
+    max-width: 100%;
+  }
+
+  &__leftPhoto {
+    height: auto;
+    max-width: 50%;
+    border-right: solid 1px white;
+  }
+
+  &__rightPhoto {
+    height: auto;
+    max-width: 50%;
+    border-left: solid 1px white;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  &__likes {
+    position: relative;
+    color: blue;
+    display: flex;
+    align-items: center;
+  }
+
+  &__likesButton {
+    width: 20px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  &__like {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+
+  &__like:first-of-type {
+    margin-left: 0.3rem;
+  }
+
+  &__like:last-of-type {
+    margin: 0 0.3rem;
+  }
+
+  &__likes::before {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 13px;
+  }
+
+  &__plus {
+    color: green;
+    font-weight: bold;
+    margin-left: 0.5rem;
+    font-size: 1em;
+  }
+
+  &__minus {
+    color: red;
+    font-weight: bold;
+    margin-left: 0.5rem;
+    font-size: 1em;
+  }
+
+  &__commentsButton {
+    color: blue;
+    cursor: pointer;
+  }
+
+  &__comments {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 0.5rem;
+  }
+
+  &__comment {
+    display: flex;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    background-color: white;
+    flex-wrap: wrap;
+  }
+
+  &__avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+  }
+
+  &__author {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+  }
+
+  &__text {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  &__addComment {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  &__commentTitle {
+    width: 100%;
+    color: blue;
+    margin: 0.5rem 0;
+  }
+
+  &__textarea,
+  &__textarea:focus {
+    outline: inherit;
+    width: 73%;
+    height: 15px;
+    padding: 0.5rem;
+    margin: 0px;
+    resize: none;
+  }
+}
+
+.Post:first-of-type {
+  margin-top: 1rem;
+}

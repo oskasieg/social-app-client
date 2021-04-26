@@ -1,0 +1,137 @@
+.EditProfileForm {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  max-width: 450px;
+
+  @media (min-width: 375px) {
+    padding: 1rem;
+  }
+
+  background-color: #45454526;
+  box-shadow: 0px 0px 5px #00000075;
+  border-radius: 10px;
+  padding-bottom: 1rem;
+  padding: 0.5rem;
+  padding-top: 0;
+  margin-bottom: 2rem;
+
+  &__title {
+    color: #2f2fa4;
+    text-align: center;
+    margin: 0.5rem 0 0;
+  }
+
+  &__title:first-of-type {
+    margin-bottom: 0.5rem;
+  }
+
+  &__label {
+    color: blue;
+    margin-top: 0.5rem;
+  }
+
+  &__row {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__avatar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+  }
+
+  &__fileInput {
+    width: 90px;
+  }
+
+  &__field {
+    margin: 0.2rem 0 0.5rem;
+  }
+
+  &__input {
+    margin: 0.2rem 0 0;
+    width: 60%;
+  }
+
+  &__button,
+  &__button:focus {
+    outline: inherit;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    height: autp;
+    color: blue;
+    cursor: pointer;
+  }
+
+  &__buttonCancel,
+  &__buttonCancel:focus {
+    outline: inherit;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    height: autp;
+    color: red;
+    cursor: pointer;
+  }
+
+  &__buttonSubmit,
+  &__buttonSubmit:focus {
+    outline: inherit;
+    border: none;
+    padding: 0;
+    height: autp;
+    color: #2a753a;
+    cursor: pointer;
+    background-color: #85ff85;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid;
+    border-radius: 5px;
+    width: 75px;
+  }
+
+  &__buttonCancelForm,
+  &__buttonCancelForm:focus {
+    outline: inherit;
+    border: none;
+    padding: 0;
+    padding: 0.2rem 0.5rem;
+    background-color: #ff9b97;
+    height: autp;
+    color: red;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid;
+    width: 75px;
+  }
+
+  &__error {
+    height: 1em;
+    font-size: 0.8em;
+    margin-top: 0.2rem;
+    color: red;
+    width: 100%;
+    margin-bottom: 0.3rem;
+    text-align: center;
+  }
+
+  &__line {
+    align-self: center;
+    margin: 0.5rem 0;
+    height: 1px;
+    width: 90%;
+    background-color: blue;
+  }
+}

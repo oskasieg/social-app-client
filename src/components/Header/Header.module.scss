@@ -1,0 +1,110 @@
+.Header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #5e7ccfa3;
+  box-shadow: 1px 1px 5px #0000ffc9;
+  flex-wrap: wrap;
+  align-self: flex-start;
+
+  &__logo {
+    font-size: 1.2em;
+    margin: 1rem;
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    @media (min-width: 750px) {
+      font-size: 1.3em;
+    }
+  }
+
+  &__menu {
+    margin: 0.5rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 28px;
+    height: 20px;
+  }
+
+  &__bars {
+    width: 28px;
+    height: 2px;
+    background-color: white;
+    position: relative;
+  }
+
+  &__bars::before {
+    content: '';
+    position: absolute;
+    background-color: white;
+    width: 28px;
+    height: 2px;
+    bottom: 7px;
+  }
+
+  &__bars::after {
+    content: '';
+    position: absolute;
+    background-color: white;
+    width: 28px;
+    height: 2px;
+    top: 7px;
+  }
+
+  &__options {
+    padding: 1rem 1rem 0.5rem 1rem;
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+
+    @media (min-width: 800px) {
+      position: absolute;
+      width: 200px;
+      right: 1rem;
+      top: 3rem;
+      border: solid 1px;
+      font-size: 1em;
+    }
+  }
+
+  &__hidden {
+    display: none;
+  }
+
+  &__option {
+    text-align: center;
+    margin: 0 0 0.5rem 0;
+    padding: 0 0 0.5rem 0;
+    width: 90%;
+    border-bottom: 1px solid black;
+    text-decoration: none;
+    color: blue;
+  }
+
+  &__option:last-of-type {
+    border: none;
+    margin: 0;
+  }
+
+  &__lngButtons {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  &__lngButton,
+  &__lngButton:focus {
+    background-color: transparent;
+    margin: 0 0 0 0.3rem;
+    border: none;
+    font-size: 1em;
+    padding: 0;
+    outline: inherit;
+    cursor: pointer;
+  }
+}

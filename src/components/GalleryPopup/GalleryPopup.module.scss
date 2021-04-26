@@ -1,0 +1,50 @@
+.GalleryPopup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__container,
+  &__container:focus {
+    background-color: #474747;
+    box-shadow: 0px 0px 7px #050404;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    outline: inherit;
+    margin: 1rem;
+    padding: 0.2rem;
+    align-items: center;
+    width: 98%;
+
+    @media (min-width: 600px) {
+      width: auto;
+      padding: 1rem;
+    }
+  }
+
+  &__photo {
+    max-width: 85%;
+    height: auto;
+  }
+
+  &__photos {
+    display: flex;
+    overflow-x: auto;
+  }
+
+  &__smallPhoto {
+    padding-top: 0.2rem;
+    width: auto;
+    height: 70px;
+    opacity: 0.5;
+    cursor: pointer;
+  }
+
+  &__smallPhotoActive {
+    padding-top: 0.2rem;
+    width: auto;
+    height: 70px;
+    border: solid 1px blue;
+    cursor: pointer;
+  }
+}
